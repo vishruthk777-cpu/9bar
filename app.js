@@ -43,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Close Mobile Menu when clicking outside of it
+  document.addEventListener('click', (e) => {
+    if (navMenu && navMenu.classList.contains('active')) {
+      if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
   // ==========================================================================
   // SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
   // ==========================================================================

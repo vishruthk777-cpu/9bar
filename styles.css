@@ -160,7 +160,7 @@ section {
 }
 
 .section-title {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 4vw + 1.2rem, 3.5rem);
   line-height: 1.15;
   margin-bottom: 1.5rem;
   font-weight: 800;
@@ -368,6 +368,11 @@ header.scrolled {
   flex-direction: column;
   gap: 6px;
   z-index: 101;
+  width: 48px;
+  height: 48px;
+  padding: 15px 11.5px; /* Center 25px spans inside 48px box */
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-toggle span {
@@ -470,6 +475,7 @@ header.scrolled {
   justify-content: center;
   gap: 2rem;
   margin-bottom: 4rem;
+  flex-wrap: wrap; /* Prevent horizontal scroll on narrow mobile screens */
 }
 
 .tab-btn {
@@ -568,7 +574,7 @@ header.scrolled {
 }
 
 .sig-name {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 4vw + 1.2rem, 3.5rem);
   line-height: 1.1;
   color: var(--text-dark-primary);
   margin-bottom: 1.5rem;
@@ -1802,12 +1808,64 @@ footer {
     padding: 6rem 1.5rem;
   }
   
-  .nav-menu {
-    gap: 1.5rem;
+  header {
+    padding: 1.2rem 1.5rem;
   }
   
-  .hero-title {
-    font-size: 3.8rem;
+  header.scrolled {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: var(--espresso-black);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4rem 3rem;
+    gap: 2.2rem; /* Touch-friendly gap */
+    transition: var(--transition-smooth);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    z-index: 100;
+  }
+
+  /* Increase navigation menu links touch size */
+  .nav-menu .nav-link {
+    width: 100%;
+    display: block;
+    padding: 0.8rem 0;
+    font-size: 0.95rem; /* Better readability */
+  }
+
+  .nav-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1.2rem;
+    margin-top: 1rem;
+  }
+  
+  .nav-cta .btn,
+  .nav-cta .btn-instagram-nav {
+    width: 100%;
+    text-align: center;
+    height: 48px; /* Touch target minimum height */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+  }
+  
+  .nav-toggle {
+    display: flex;
   }
   
   .sig-panel {
@@ -1886,53 +1944,6 @@ footer {
 }
 
 @media (max-width: 767px) {
-  header {
-    padding: 1.2rem 1.5rem;
-  }
-  
-  header.scrolled {
-    padding: 0.8rem 1.5rem;
-  }
-  
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 320px;
-    height: 100vh;
-    background-color: var(--espresso-black);
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 4rem 3rem;
-    gap: 2rem;
-    transition: var(--transition-smooth);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-    z-index: 100;
-  }
-
-  .nav-cta {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 1rem;
-  }
-  
-  .nav-cta .btn,
-  .nav-cta .btn-instagram-nav {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .nav-menu.active {
-    right: 0;
-  }
-  
-  .nav-toggle {
-    display: flex;
-  }
-  
   .hero-pretitle {
     font-size: 0.8rem;
     letter-spacing: 0.25em;
@@ -1956,14 +1967,6 @@ footer {
   
   .hero-actions .btn {
     width: 100%;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-  }
-  
-  .sig-name {
-    font-size: 2.2rem;
   }
   
   .tab-btn {
